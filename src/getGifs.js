@@ -6,8 +6,12 @@ export default function getGifs ({keyword = 'spiderman'}={}){
         .then(respose => {
             const {data=[]}=respose
             if(Array.isArray(data)){
-                const gifs = data.map(image => image.images.downsized_medium.url)
-                return gifs
+              const gifs = data.map(image => {  
+                const {images,title,id}=image
+                const {url} =images.downsized_medium
+               return {title, id, url}
+            })
+            return gifs
             }
         })
 }
